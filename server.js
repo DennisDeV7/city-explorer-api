@@ -1,8 +1,5 @@
 'use strict';
 
-console.log('our first server');
-
-
 //Require
 const express = require('express');
 require('dotenv').config();
@@ -11,10 +8,11 @@ let data = require('./data/weather.json')
 
 const cors = require('cors');
 const axios = require('axios')
-//USE
 
 //Express
 const app = express();
+
+//USE
 app.use(cors());
 
 const PORT = process.env.PORT || 3002;
@@ -35,7 +33,7 @@ app.get('/weather', async (request, response) => {
     response.send(dataToSend);
     console.log(datatoSend);
   } catch (error) {
-    // next(error);
+    console.log(error.message);
   }
 })
 
@@ -75,5 +73,6 @@ class Forecast {
 app.use((error, request, response, next) => {
   response.status(500).send(error.message);
 })
+
 //Listen
 app.listen(PORT, () => console.log(`listening on port: ${PORT}`));

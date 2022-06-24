@@ -15,6 +15,7 @@ This project creates a custom API server which will provide weather data to our 
 ![Architecture Diagram](city_explorer_flow_lab07.png)
 ![Architecture Diagram](lab08_flow.png)
 ![Architecture Diagram](city_explorer_dataflow2.png)
+![Architecture Diagram](city_explorer_dataflow3.png)
 
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
