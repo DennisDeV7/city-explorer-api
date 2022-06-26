@@ -1,33 +1,28 @@
 'use strict';
 
-//Require
-const express = require('express');
 require('dotenv').config();
-let data = require('./data/weather.json')
+const express = require('express');
 const cors = require('cors');
-const axios = require('axios')
 
-
-// Require modules
-const getWeather = require('./modules/weather');
+const weather = require('./modules/weather.js');
 const getMovies = require('./modules/movie');
-
-//Express
 const app = express();
-
-//USE
 app.use(cors());
 
 const PORT = process.env.PORT || 3002;
 
-//Routes
-app.get('/weather', getWeather); 
+app.get('/weather', weatherHandler);
 app.get('/movies', getMovies);
 
-//Errors
-app.use((error, request, response, next) => {
-  response.status(500).send(error.message);
-})
+function weatherHandler(request, response) {
+  const { lat, lon } = request.query;
+  weather(lat, lon)
+  .then(summaries => response.send(summaries))
+  .catch((error) => {
+    console.error(error);
+    response.status(200).send('Sorry. Something went wrong!')
+  });
+}  
 
-//Listen
+
 app.listen(PORT, () => console.log(`listening on port: ${PORT}`));
